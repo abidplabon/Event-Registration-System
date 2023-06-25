@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'App_Login',
+    'App_Posts',
     'crispy_forms',     #make sure install pip and add them
     'crispy_bootstrap4' #make sure install pip and add them
 ]
