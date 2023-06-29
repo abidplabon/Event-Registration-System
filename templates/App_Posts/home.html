@@ -38,6 +38,11 @@
             <img src="/media/{{post.image}}" width="100%">
             <div style="padding:20px">
                 <h3>{{post.caption}}</h3>
+                {% if post.pk in liked_post_list %}
+                <a href="{% url 'App_Posts:unliked' pk=post.pk %}"> <i class="fa fa-heart" style="font-size:36px"></i></a>
+                {% else %}
+                <a href="{% url 'App_Posts:liked' pk=post.pk %}"> <i class="fa fa-heart-o" style="font-size:36px"></i></a>
+                {% endif %}
             </div>
 
         </div>
