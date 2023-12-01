@@ -1,4 +1,4 @@
-![Screenshot (548)](https://github.com/abidplabon/InstagramDjango/assets/54079464/568b7269-4301-45ac-b655-3b3704da83ae)**Create Events:**
+**Create Events:**
 - Each event should have a title, description, date, time, and location name.
 **Event Registration:**
 - Registered users should be able to register for an event.
@@ -25,7 +25,6 @@ registrations.
 ![Screenshot (545)](https://github.com/abidplabon/InstagramDjango/assets/54079464/3a3c5e34-2aae-4524-8c89-da997765f433)
 ![Screenshot (546)](https://github.com/abidplabon/InstagramDjango/assets/54079464/f95c4fe0-f640-4ebc-9eb6-d67ef27e1280)
 ![Screenshot (547)](https://github.com/abidplabon/InstagramDjango/assets/54079464/edd99830-5cb1-40dd-9405-ca1d454cfb90)
-![Screenshot (547)](https://github.com/abidplabon/InstagramDjango/assets/54079464/38ead3ae-e713-491e-9ae0-f281fb7d83b6)
 ![Screenshot (549)](https://github.com/abidplabon/InstagramDjango/assets/54079464/45d38648-8be7-45cb-a634-e7750b909c2c)
 
 
