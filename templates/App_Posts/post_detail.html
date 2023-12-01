@@ -1,0 +1,23 @@
+<div style="border:1px solid #ddd;">
+    <div class="">
+        {% if post.author.user_profile.profile_pic %}
+            <img src="/media/{{ post.author.user_profile.profile_pic }}" width="50px" height="50px" class="rounded-circle">
+        {% else %}
+            <img src="/media/profile_pics/download.jpg" width="50px" height="50px" class="rounded-circle">
+        {% endif %}
+        <a href="{% url 'App_Login:user' post.author %}">{{ post.author }}</a>
+    </div>
+    <br>
+    <img src="/media/{{ post.image }}" width="100%">
+    <div style="padding:20px">
+        <h3>{{ post.event_title }}</h3>
+        <h3>{{ post.location }}</h3>
+        <h3>{{ post.time }}</h3>
+        <h3>{{ post.date }}</h3>
+        {% if liked %}
+            <a href="{% url 'App_Posts:unliked' pk=post.pk %}"><i class="fa fa-heart" style="font-size:36px"></i></a>
+        {% else %}
+            <a href="{% url 'App_Posts:liked' pk=post.pk %}"><i class="fa fa-heart-o" style="font-size:36px"></i></a>
+        {% endif %}
+    </div>
+</div>

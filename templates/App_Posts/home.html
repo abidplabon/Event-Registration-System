@@ -2,6 +2,8 @@
 {% block title %} {{ title }}  {% endblock %}
 
 {% block body_block %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
 
 {% if search %}
 
@@ -17,56 +19,75 @@
             <div class="col-sm-10">
                 <a href="{% url 'App_Login:user' user.username %}"> <h6>{{ user.username }}</h6> </a>
                 <h6>{{ user.user_profile.full_name }}</h6>
-
             </div>
         </div>
     {% endfor %}
-{%else%}
-<div class="row">
-    <div class="col-sm-8">
-    {% for post in posts %}
-        <div style="border:1px solid #ddd;">
-            <div class="">
-                {% if post.author.user_profile.profile_pic %}
-                    <img src="/media/{{ post.author.user_profile.profile_pic }}" width="50px" height="50px" class="rounded-circle">
-                {% else %}
-                    <img src="/media/profile_pics/download.jpg" width="50px" height="50px" class="rounded-circle" > </a>
-                {% endif %}
-                <a href="{% url 'App_Login:user' post.author %}">{{post.author}}</a>
-            </div>
-            <br>
-            <img src="/media/{{post.image}}" width="100%">
-            <div style="padding:20px">
-                <h3>{{post.caption}}</h3>
-                {% if post.pk in liked_post_list %}
-                <a href="{% url 'App_Posts:unliked' pk=post.pk %}"> <i class="fa fa-heart" style="font-size:36px"></i></a>
-                {% else %}
-                <a href="{% url 'App_Posts:liked' pk=post.pk %}"> <i class="fa fa-heart-o" style="font-size:36px"></i></a>
-                {% endif %}
-            </div>
 
+    {% for post in post_results %}
+        <div>
+            <h3><a href="{% url 'App_Posts:post_detail' pk=post.pk %}">{{ post.event_title }}</a></h3>
+            <p>Post Location: {{ post.location }}</p>
+            <!-- Add more details as needed -->
         </div>
-        {% endfor %}
-    </div>
-    <div class="col-sm-4">
-        <div class="row">
-            <div class="col-sm-4">
-                {% if user.user_profile.profile_pic %}
-                    <img src="/media/{{ user.user_profile.profile_pic }}" width="75px" height="75px" class="rounded-circle">
-                {% else %}
-                    <img src="/media/profile_pics/download.jpg" width="75px" height="75px" class="rounded-circle" > </a>
-                {% endif %}
-            </div>
-            <div class="col-sm-8">
-                <b>{{user.username}}</b><br>
-                <b>{{user.user_profile.fullname}}</b>
+    {% endfor %}
+
+{% else %}
+    <div class="row">
+        <div class="col-sm-8">
+            {% for post in posts %}
+                <div style="border:1px solid #ddd;">
+                    <div class="">
+                        {% if post.author.user_profile.profile_pic %}
+                            <img src="/media/{{ post.author.user_profile.profile_pic }}" width="50px" height="50px" class="rounded-circle">
+                        {% else %}
+                            <img src="/media/profile_pics/download.jpg" width="50px" height="50px" class="rounded-circle" > </a>
+                        {% endif %}
+                        <a href="{% url 'App_Login:user' post.author %}">{{post.author}}</a>
+                    </div>
+                    <br>
+                    <img src="/media/{{post.image}}" width="100%">
+                    <div style="padding:20px">
+                        <h3><i class="fas fa-calendar"></i> {{post.event_title}}</h3>
+    <h3><i class="fas fa-map-marker-alt"></i> {{post.location}}</h3>
+    <h3><i class="far fa-clock"></i> {{post.time}}</h3>
+    <h3><i class="far fa-calendar-alt"></i> {{post.date}}</h3>
+    <h3><i class="fas fa-users"></i> {{post.max_likes}}</h3>
+                        <p>Attendant: {{ post.likes }}</p>
+                        {% if post.likes < post.max_likes %}
+    {% if post.pk in liked_post_list %}
+        <a href="{% url 'App_Posts:unliked' pk=post.pk %}"> <button class="btn btn-danger">Not Going</button></a>
+    {% else %}
+        <a href="{% url 'App_Posts:liked' pk=post.pk %}"> <button class="btn btn-success">Going</button></a>
+    {% endif %}
+{% else %}
+    {% if post.pk in liked_post_list %}
+        <a href="{% url 'App_Posts:unliked' pk=post.pk %}"> <button class="btn btn-danger">Not Going</button></a>
+    {% else %}
+        <button class="btn btn-success" disabled> Not Allowed</button>
+    {% endif %}
+{% endif %}
+
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="col-sm-4">
+            <div class="row">
+                <div class="col-sm-4">
+                    {% if user.user_profile.profile_pic %}
+                        <img src="/media/{{ user.user_profile.profile_pic }}" width="75px" height="75px" class="rounded-circle">
+                    {% else %}
+                        <img src="/media/profile_pics/download.jpg" width="75px" height="75px" class="rounded-circle" > </a>
+                    {% endif %}
+                </div>
+                <div class="col-sm-8">
+                    <b>{{user.username}}</b><br>
+                    <b>{{user.user_profile.fullname}}</b>
+                </div>
             </div>
         </div>
-
     </div>
 
-</div>
-
-{%endif%}
+{% endif %}
 
 {% endblock %}
